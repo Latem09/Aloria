@@ -1,0 +1,1 @@
+export const POURTOUR_AUREN={id:'pourtour_auren',name:"Pourtour d'Aurên",subtitle:"Aux portes d'Aurên",description:"Les terres sauvages s'étendent au-delà des remparts d'Aurên.",niveaux:['lisiere_foret']};
