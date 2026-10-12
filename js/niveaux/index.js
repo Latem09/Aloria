@@ -1,3 +1,0 @@
-const LISIERE_FORET={id:'lisiere_foret',monde:'pourtour_auren',name:'Lisière de la forêt',x:48,y:35,description:"Aux portes d'Aurên, les dernières routes pavées du royaume d'Aloria cèdent peu à peu la place aux sentiers sauvages. Sous les arbres de la lisière, des grognements inquiétants troublent le silence. Pour les aventuriers qui osent s'éloigner des remparts, les premiers dangers ne tardent jamais à se manifester…",combats:[['loup_sauvage'],['loup_sauvage','loup_sauvage']],recompense:'lisiere_foret'};
-
-export const NIVEAUX={lisiere_foret:LISIERE_FORET};
