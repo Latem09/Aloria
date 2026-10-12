@@ -1,0 +1,2 @@
+// Les consommables n'ont jamais de champ de rareté.
+export const CONSOMMABLES={camomille:{id:'camomille',image:'./assets/camomille.webp',name:'Camomille',category:'consumables',soin:15,revente:3,source:'Trouvable en aventure',description:"Cette petite fleur aux vertus apaisantes pousse au détour des chemins d'Aloria. Entre les mains d'un aventurier blessé, ses pétales valent parfois davantage que l'or."}};
