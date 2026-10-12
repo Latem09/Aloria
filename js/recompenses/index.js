@@ -1,0 +1,2 @@
+export const RECOMPENSES={lisiere_foret:{xp:20,tirages:[{id:'dent_loup',chances:.20,essais:3},{id:'camomille',chances:.25,essais:1}]} ,territoire_ennemi:{xp:30,tirages:[{id:'dent_loup',chances:.20,essais:3},{id:'camomille',chances:.25,essais:1},{id:'griffe_loup_alpha',chances:.10,essais:1}]}};
+export function tirerRecompenses(id,alea=Math.random){const r=RECOMPENSES[id];if(!r)throw Error('Récompense inconnue');const objets=[];for(const t of r.tirages)for(let i=0;i<t.essais;i++)if(alea()<t.chances)objets.push(t.id);return {xp:r.xp,objets}}
