@@ -1,1 +1,0 @@
-export const BESTIAIRE={loup_sauvage:{butinPotentiel:['dent_loup']},loup_alpha:{butinPotentiel:['griffe_loup_alpha']},sanglier_boiteux:{butinPotentiel:['defense_sanglier']},sanglier_sauvage:{butinPotentiel:['defense_sanglier']},sanglier_feroce:{butinPotentiel:['sabot_sanglier']},ours_brun:{butinPotentiel:['croc_ours']},ours_des_cavernes:{butinPotentiel:['tete_ours_cavernes']}};
