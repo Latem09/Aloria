@@ -1,5 +1,0 @@
-export const EQUIPEMENTS={
- chapeau_aventurier:{id:'chapeau_aventurier',image:'./assets/chapeau-aventurier.webp',name:"Chapeau d'aventurier",slot:'casque',rarity:'common',pv:1,revente:1,description:'Ce modeste chapeau a vu plus de chemins poussiéreux que de batailles. Pourtant, même les plus grandes légendes commencent par un premier voyage.'},
- tunique_aventurier:{id:'tunique_aventurier',image:'./assets/tunique-aventurier.webp',name:"Tunique d'aventurier",slot:'plastron',rarity:'common',pv:5,revente:2,description:"Cousue de toile robuste et renforcée de cuir usé, cette tunique a accompagné bien des voyageurs sur les routes d'Aloria. Elle ne promet pas la gloire, seulement une chance de survivre au premier combat."},
- bottes_aventurier:{id:'bottes_aventurier',image:'./assets/bottes-aventurier.webp',name:"Bottes d'aventurier",slot:'bottes',rarity:'common',esquive:1,revente:1,description:"Usées par les sentiers et les longues marches, ces bottes ont appris à leur propriétaire qu'un pas de côté vaut parfois mieux qu'une armure."}
-};
