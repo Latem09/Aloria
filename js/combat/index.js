@@ -34,12 +34,12 @@ function effetsCapacite(a,attaquant,cible,allies,alea,combat){
 }
 function attaquePonderee(e,alea){const ouverture=e.sequenceOuverture||[];e.actionsIA??=0;const n=e.actionsIA++;if(n<ouverture.length)return ouverture[n];const poids=e.poidsAttaques||e.attaques.map(()=>100/e.attaques.length);let roll=alea()*100;for(let i=0;i<e.attaques.length;i++){roll-=poids[i]||0;if(roll<0)return e.attaques[i]}return e.attaques[e.attaques.length-1]}
 function message(r){return r.etat==='echec'?'attaque manquée':r.etat==='esquive'?'esquivée':`${r.degats} dégâts${r.critique?' (critique)':''}`}
-function terminerTourJoueur(c,alea){syncJoueur(c);for(const id of finTour(c.joueur))log(c,`${EFFETS[id]?.nom||id} expire.`);syncCombat(c);c.tourJoueurCommence=false;if(finCombat(c,alea))return;c.phase='riposte';c.ennemiSuivant=0;c.tourEnnemi++}
+function terminerTourJoueur(c,alea){syncJoueur(c);for(const id of finTour(c.joueur))log(c,`${EFFETS[id]?.nom||id} expire.`);c.joueur.enTour=false;syncCombat(c);c.tourJoueurCommence=false;if(finCombat(c,alea))return;c.phase='riposte';c.ennemiSuivant=0;c.tourEnnemi++}
 function finCombat(c,alea){if(!c.ennemis.every(e=>e.pvActuels<=0))return false;const n=NIVEAUX[c.niveauId];if(c.combatIndex+1<n.combats.length){c.phase='preparation';c.preparationUtilisee=false;log(c,'Combat remporté. Préparez-vous pour le prochain.')}else{c.phase='victoire';c.recompenses=tirerRecompenses(n.recompense,alea);c.joueur.effetsActifs=[];c.joueur.bouclier=null;syncCombat(c);log(c,'Niveau terminé !')}return true}
-function debutActionJoueur(c){if(c.tourJoueurCommence)return;c.tourJoueurCommence=true;syncJoueur(c);const tour=debutTour(c.joueur);tour.evenements.forEach(m=>log(c,m));c.actionsRestantes=tour.actions;syncCombat(c);if(tour.mort){c.phase='defaite';c.penaliteAppliquee=false;log(c,'Défaite.');return}if(tour.actions===0){terminerTourJoueur(c,Math.random)}}
+function debutActionJoueur(c){if(c.tourJoueurCommence)return;c.tourJoueurCommence=true;syncJoueur(c);c.joueur.enTour=true;const tour=debutTour(c.joueur);tour.evenements.forEach(m=>log(c,m));c.actionsRestantes=tour.actions;syncCombat(c);if(tour.mort){c.phase='defaite';c.penaliteAppliquee=false;log(c,'Défaite.');return}if(tour.actions===0){terminerTourJoueur(c,Math.random)}}
 export function attaquer(c,p,id,index,alea=Math.random){if(c.phase!=='combat')throw Error('Combat indisponible');const a=ATTAQUES[id],arme=CATALOGUE[p.equipped.arme];if(!a||!arme?.attaques?.includes(id))throw Error('Attaque indisponible');debutActionJoueur(c);if(c.phase!=='combat')return null;
  syncJoueur(c);
- if(c.joueur.charge){if(c.joueur.charge.attaqueId!==id){annulerCharge(c.joueur);log(c,'Préparation abandonnée.');syncCombat(c);finirAction(c,alea);return {etat:'annulation'}}else if(c.joueur.charge.prete){annulerCharge(c.joueur)}else{const avance=progresserCharge(c.joueur);log(c,avance.prete?'Attaque chargée prête à lancer.':'Préparation de l’attaque chargée.');syncCombat(c);finirAction(c,alea);return {etat:'preparation'}}}
+ if(c.joueur.charge){if(c.joueur.charge.attaqueId!==id){annulerCharge(c.joueur);log(c,'Préparation abandonnée.');syncCombat(c);finirAction(c,alea);return {etat:'annulation'}}else if(c.joueur.charge.prete){annulerCharge(c.joueur)}else{const avance=progresserCharge(c.joueur);if(avance.prete){annulerCharge(c.joueur)}else{log(c,'Préparation de l’attaque chargée.');syncCombat(c);finirAction(c,alea);return {etat:'preparation'}}}}
  else if(a.preparation||a.charge){const avance=demarrerCharge(c.joueur,a);log(c,avance.prete?'Attaque chargée prête à lancer.':'Préparation de l’attaque chargée.');syncCombat(c);finirAction(c,alea);return {etat:'preparation'}}
  if(a.type==='Soutien'||a.type==='Support'){
    const chance=borne((a.reussite??1)*facteur(c.joueur,'precision'));
@@ -47,7 +47,7 @@ export function attaquer(c,p,id,index,alea=Math.random){if(c.phase!=='combat')th
    if(succes){effetsCapacite(a,c.joueur,c.joueur,[c.joueur],alea,c);if(a.bouclier)appliquerEffet(c.joueur,'bouclier',{points:a.bouclier,duree:a.duree??1});if(a.regeneration)appliquerEffet(c.joueur,'regeneration',{pourcentage:a.regeneration,duree:a.duree??1});}
    log(c,`${a.nom} : ${succes?'réussi':'échec'}.`);syncCombat(c);finirAction(c,alea);return {etat:succes?'soutien':'echec',degats:0};
  }
- const targets=ciblesAttaque(a,c.ennemis,index);if(!targets.length)throw Error('Cible invalide');const results=[];
+ const provoquants=c.ennemis.map((e,i)=>({e,i})).filter(x=>x.e.pvActuels>0&&effet(x.e,'provocation'));if(provoquants.length&&a.ciblage==='unique_choix'&&!provoquants.some(x=>x.i===index))throw Error('Cette cible est protégée par une provocation.');const targets=ciblesAttaque(a,c.ennemis,index);if(!targets.length)throw Error('Cible invalide');const results=[];
  for(const {c:cible} of targets){const r=resoudreAttaque({attaque:a,attaquant:{...personnageAttaquant(p),effetsActifs:c.joueur.effetsActifs},cible,arme:arme.attaque,alea});if(r.etat==='touche'){const hit=degatsSurCible(cible,r.degats);if(hit.bouclier)log(c,`Bouclier de ${cible.nom} : ${hit.bouclier} dégâts absorbés.`);effetsCapacite(a,c.joueur,cible,[c.joueur],alea,c)}log(c,`${a.nom} sur ${cible.nom} : ${message(r)}.`);results.push(r)}
  syncCombat(c);finirAction(c,alea);return results.length===1?results[0]:results;
 }
@@ -59,11 +59,11 @@ export function actionEnnemiSuivante(c,p,alea=Math.random){
  while(c.ennemiSuivant<c.ennemis.length&&c.ennemis[c.ennemiSuivant].pvActuels<=0)c.ennemiSuivant++;
  if(c.ennemiSuivant>=c.ennemis.length){c.phase='combat';return null}
  const e=c.ennemis[c.ennemiSuivant];
- if(!e.tourEnCours){const tour=debutTour(e);e.tourEnCours=true;e.actionsEnnemies=tour.actions;for(const msg of tour.evenements)log(c,`${e.nom} — ${msg}`);}
- if(e.pvActuels<=0||e.actionsEnnemies<=0){e.tourEnCours=false;finTour(e);c.ennemiSuivant++;finRiposte(c);return {ennemi:e,attaque:null}}
+ if(!e.tourEnCours){const tour=debutTour(e);e.tourEnCours=true;e.enTour=true;e.actionsEnnemies=tour.actions;for(const msg of tour.evenements)log(c,`${e.nom} — ${msg}`);}
+ if(e.pvActuels<=0||e.actionsEnnemies<=0){e.tourEnCours=false;finTour(e);e.enTour=false;c.ennemiSuivant++;finRiposte(c);return {ennemi:e,attaque:null}}
  let id=e.charge?.attaqueId||attaquePonderee(e,alea);const a=ATTAQUES[id];if(!a){e.actionsEnnemies=0;return actionEnnemiSuivante(c,p,alea)}
- if(e.charge){if(!e.charge.prete){progresserCharge(e);log(c,`${e.nom} prépare une attaque.`);e.actionsEnnemies--;if(e.actionsEnnemies===0){e.tourEnCours=false;finTour(e);c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id}}annulerCharge(e)}
- else if(a.preparation||a.charge){demarrerCharge(e,a);log(c,`${e.nom} prépare une attaque.`);e.actionsEnnemies--;if(e.actionsEnnemies===0){e.tourEnCours=false;finTour(e);c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id}}
+ if(e.charge){if(!e.charge.prete){const avance=progresserCharge(e);if(!avance.prete){log(c,`${e.nom} prépare une attaque.`);e.actionsEnnemies--;if(e.actionsEnnemies===0){e.tourEnCours=false;finTour(e);e.enTour=false;c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id}}}annulerCharge(e)}
+ else if(a.preparation||a.charge){demarrerCharge(e,a);log(c,`${e.nom} prépare une attaque.`);e.actionsEnnemies--;if(e.actionsEnnemies===0){e.tourEnCours=false;finTour(e);e.enTour=false;c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id}}
  const allies=c.ennemis.filter(x=>x.pvActuels>0);const joueur={...joueurCible(p),...c.joueur,esquive:esquive(p)};
  const boost=allies.some(x=>x.famille==='Loup'&&effet(x,'ralliement'))&&e.famille==='Loup'?1.1:1;
  if(a.type==='Soutien'){
@@ -75,7 +75,7 @@ export function actionEnnemiSuivante(c,p,alea=Math.random){
   syncCombat(c);log(c,`${e.nom} — ${a.nom} : ${message(r)}. ${c.pv} PV restants.`);
   if(c.pv<=0){c.phase='defaite';c.penaliteAppliquee=false;log(c,'Défaite.');return {ennemi:e,attaque:id,resultat:r}}
  }
- e.actionsEnnemies--;if(e.actionsEnnemies<=0){e.tourEnCours=false;finTour(e);c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id};
+ e.actionsEnnemies--;if(e.actionsEnnemies<=0){e.tourEnCours=false;finTour(e);e.enTour=false;c.ennemiSuivant++}finRiposte(c);return {ennemi:e,attaque:id};
 }
 function finRiposte(c){while(c.ennemiSuivant<c.ennemis.length&&c.ennemis[c.ennemiSuivant].pvActuels<=0)c.ennemiSuivant++;if(c.ennemiSuivant>=c.ennemis.length){c.phase='combat';c.effets=c.effets.filter(x=>x.expireApres>c.tourEnnemi)}}
 export function combatSuivant(c){if(c.phase!=='preparation')throw Error('Pas en préparation');c.combatIndex++;c.ennemis=generer(NIVEAUX[c.niveauId].combats[c.combatIndex]);c.phase='combat';c.effets=[];c.ennemiSuivant=0;c.tourEnnemi=0;c.actionsRestantes=1;c.tourJoueurCommence=false;log(c,`Combat ${c.combatIndex+1} !`)}

@@ -29,8 +29,8 @@ export function appliquerEffet(c,id,options={}){
  if(id==='poison'&&(c.joueur===false||effet(c,'poison')))return false;
  if(id==='soin_instantane'){c.pvActuels=Math.min(c.pvMax,c.pvActuels+arrondi(options.points??c.pvMax*(options.pourcentage??0)));return true;}
  if(id==='gele'||id==='etourdissement'){c.effetsActifs=c.effetsActifs.filter(e=>e.id!=='gele'&&e.id!=='etourdissement');c.charge=null}
- const data={id,duree:options.duree??1,...options};const i=c.effetsActifs.findIndex(e=>e.id===id);if(i>=0)c.effetsActifs.splice(i,1);c.effetsActifs.push(data);
- if(id==='bouclier')c.bouclier={points:Math.max(0,arrondi(options.points??c.pvMax*(options.pourcentage??0))),duree:data.duree};
+ const data={id,duree:options.duree??1,...options,skipFin:!!c.enTour};const i=c.effetsActifs.findIndex(e=>e.id===id);if(i>=0)c.effetsActifs.splice(i,1);c.effetsActifs.push(data);
+ if(id==='bouclier')c.bouclier={points:Math.max(0,arrondi(options.points??c.pvMax*(options.pourcentage??0))),duree:data.duree,maxPoints:Math.max(0,arrondi(options.points??c.pvMax*(options.pourcentage??0)))};
  return true;
 }
 export function degatsSurCible(c,montant,{poison=false}={}){
@@ -45,11 +45,11 @@ export function debutTour(c){
  if(c.pvActuels<=0)return {actions:0,evenements,mort:true};
  const regen=effet(c,'regeneration');if(regen){const soin=Math.min(c.pvMax-c.pvActuels,arrondi(c.pvMax*(regen.pourcentage??0)));c.pvActuels+=soin;evenements.push(`Régénération : +${soin} PV.`)}
  const surcharge=!!effet(c,'surcharge'),controle=!!effet(c,'gele')||!!effet(c,'etourdissement');
- if(controle){c.charge=null;evenements.push('Tour perdu : contrôle de foule.');}
+ if(controle){c.charge=null;evenements.push('Vous êtes étourdi : impossible d’attaquer !');}
  return {actions:controle?0:surcharge?2:1,evenements};
 }
 export function finTour(c){
- const expires=[];c.effetsActifs=(c.effetsActifs||[]).filter(e=>{if(e.id==='poison'||e.duree==null)return true;e.duree--;if(e.id==='bouclier'&&c.bouclier)c.bouclier.duree=e.duree;if(e.duree>0)return true;expires.push(e.id);if(e.id==='bouclier')c.bouclier=null;return false});return expires;
+ const expires=[];c.effetsActifs=(c.effetsActifs||[]).filter(e=>{if(e.id==='poison'||e.duree==null)return true;if(e.skipFin){e.skipFin=false;return true;}e.duree--;if(e.id==='bouclier'&&c.bouclier)c.bouclier.duree=e.duree;if(e.duree>0)return true;expires.push(e.id);if(e.id==='bouclier')c.bouclier=null;return false});return expires;
 }
 export function demarrerCharge(c,attaque){if(c.charge)throw Error('Charge déjà en cours');c.charge={attaqueId:attaque.id,restant:Math.max(1,Math.floor(attaque.preparation||attaque.charge||1)),prete:false};return {prete:false,lancement:false}}
 export function progresserCharge(c){if(!c.charge)throw Error('Aucune charge');if(c.charge.prete)return {prete:true,lancement:true};c.charge.restant--;c.charge.prete=c.charge.restant<=0;return {prete:c.charge.prete,lancement:false}}
