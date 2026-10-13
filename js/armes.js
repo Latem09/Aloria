@@ -1,0 +1,1 @@
+export const ARMES={lame_modeste:{id:'lame_modeste',image:'./assets/lame-modeste.webp',name:'Lame modeste',slot:'arme',rarity:'common',attaque:2,element:'neutre',attaques:['taillade'],revente:1,description:'Une lame simple, fidèle aux premiers pas des aventuriers.'}};

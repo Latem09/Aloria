@@ -1,6 +1,6 @@
 import {STATS,SLOTS,ITEMS,CATALOGUE,defaultProfile,normalizeProfile,pointsAvailable,totalStat,maxPV,esquive,resistanceElementaire,seuilXP,ajouterXP} from './data.js';
-import {RECOMPENSES} from './recompenses/index.js';import {MONDES} from './mondes/index.js';import {NIVEAUX} from './niveaux/index.js';import {MONSTRES} from './monstres/index.js';import {ATTAQUES} from './attaques/index.js';import {BESTIAIRE} from './bestiaire/index.js';
-import {creerCombat,attaquer,consommer,combatSuivant,actionEnnemiSuivante,degatsPrevus,trierEffets,EFFETS} from './combat/index.js';import {loadPlayer,savePlayer} from './firebase.js';
+import {RECOMPENSES} from './recompenses.js';import {MONDES} from './mondes.js';import {NIVEAUX} from './niveaux.js';import {MONSTRES} from './monstres.js';import {ATTAQUES} from './attaques.js';import {BESTIAIRE} from './bestiaire.js';
+import {creerCombat,attaquer,consommer,combatSuivant,actionEnnemiSuivante,degatsPrevus,trierEffets,EFFETS} from './combat.js';import {loadPlayer,savePlayer} from './firebase.js';
 let player=defaultProfile(),activeTab='city',inventoryTab='equipment',selectedItem=null,worldIndex=null,levelIndex=null,connected=false,combat=null,recompensesAppliquees=false,libraryTab='bestiaire',libraryRegion='pourtour_auren',libraryDetail=null,libraryFamily=null,marketCategory='misc',marketItem=null,marketQuantity=1;
 const panel=document.querySelector('#panel'),city=document.querySelector('#city-view'),toastEl=document.querySelector('#toast');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

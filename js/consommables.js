@@ -1,0 +1,2 @@
+// Les consommables ont une rareté comme les autres objets.
+export const CONSOMMABLES={camomille:{id:'camomille',image:'./assets/camomille.webp',name:'Camomille',category:'consumables',rarity:'common',soin:15,revente:3,source:'Trouvable en aventure',description:"Cette petite fleur aux vertus apaisantes pousse au détour des chemins d'Aloria. Entre les mains d'un aventurier blessé, ses pétales valent parfois davantage que l'or."}};

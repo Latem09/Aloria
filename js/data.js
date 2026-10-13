@@ -1,7 +1,7 @@
-import {ARMES} from './armes/index.js';
-import {EQUIPEMENTS} from './equipements/index.js';
-import {CONSOMMABLES} from './consommables/index.js';
-import {OBJETS} from './objets/index.js';
+import {ARMES} from './armes.js';
+import {EQUIPEMENTS} from './equipements.js';
+import {CONSOMMABLES} from './consommables.js';
+import {OBJETS} from './objets.js';
 export const CATALOGUE={...ARMES,...EQUIPEMENTS,...CONSOMMABLES,...OBJETS};
 export const ITEMS=Object.values(CATALOGUE);
 export const STATS=[{key:'force',name:'Force',base:10,gain:3,unit:''},{key:'vitalite',name:'Vitalité',base:100,gain:20,unit:' PV'},{key:'agilite',name:'Agilité',base:0,gain:1,unit:' %'},{key:'precision',name:'Précision',base:5,gain:1,unit:' % crit.'},{key:'puissanceCritique',name:'Puissance critique',base:1.25,gain:.03,unit:'×'},{key:'feu',name:'Feu',base:1,gain:.03,unit:'×'},{key:'glace',name:'Glace',base:1,gain:.03,unit:'×'},{key:'foudre',name:'Foudre',base:1,gain:.03,unit:'×'}];
