@@ -1,5 +1,0 @@
-const LOUP_SAUVAGE={id:'loup_sauvage',nom:'Loup sauvage',classification:'Ennemi',force:5,pv:20,esquive:10,critique:10,puissanceCritique:1.25,elements:{feu:1,glace:1,foudre:1},affinites:{},attaques:['morsure'],description:"Rôdant dans les forêts et les plaines d'Aloria, ce prédateur affamé s'attaque aux voyageurs isolés. Si sa force est modeste, sa vivacité et ses crocs acérés en font un adversaire dangereux pour les aventuriers inexpérimentés."};
-
-const LOUP_ALPHA={id:'loup_alpha',nom:'Loup Alpha',classification:'Ennemi',image:'./assets/loup-alpha.webp',force:12,pv:40,esquive:10,critique:15,puissanceCritique:1.3,elements:{feu:1,glace:1,foudre:1},affinites:{},attaques:['morsure','ralliement'],description:"Chef redouté des meutes qui rôdent aux abords d'Aurên, ce loup au pelage blanc porte les cicatrices de nombreux combats. Perché sur les rochers de la forêt, il surveille son territoire et n'hésite pas à attaquer quiconque menace sa meute."};
-LOUP_SAUVAGE.image='./assets/loup-sauvage.png';
-export const MONSTRES={loup_sauvage:LOUP_SAUVAGE,loup_alpha:LOUP_ALPHA};
