@@ -3,7 +3,7 @@ export const ATTAQUES={
  morsure:{id:'morsure',nom:'Morsure',type:'Attaque',puissance:1,reussite:.95,ciblage:'unique_choix',element:'neutre'},
  ralliement:{id:'ralliement',nom:'Ralliement',type:'Soutien',puissance:0,reussite:1,ciblage:'allies_loups',element:'neutre',bonusDegats:1.10,duree:2,description:'Renforce les dégâts finaux de la meute de 10 % pendant deux phases ennemies, lancement inclus. Non cumulable.',secret:false}
 ,
- estoc:{id:'estoc',nom:'Estoc',type:'Attaque',puissance:1.2,reussite:0.8,ciblage:'unique_choix',element:'neutre'},
+ estoc:{id:'estoc',nom:'Estocade',type:'Attaque',puissance:1.2,reussite:0.85,ciblage:'unique_choix',element:'neutre'},
  griffure:{id:'griffure',nom:'Griffure',type:'Attaque',puissance:1.2,reussite:0.8,ciblage:'unique_choix',element:'neutre'},
  charge:{id:'charge',nom:'Charge',type:'Attaque',puissance:1.5,reussite:0.6,ciblage:'unique_choix',element:'neutre',effets:[{id:'etourdissement',chance:.05,duree:1}]},
  provocation:{id:'provocation',nom:'Provocation',type:'Soutien',puissance:0,reussite:0.85,ciblage:'soi',element:'neutre',effets:[{id:'provocation',chance:1,duree:2,cible:'soi'}]},
