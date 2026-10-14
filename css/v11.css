@@ -51,3 +51,27 @@
 .map-art{position:relative;overflow:hidden}.map-trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}.map-trail path{fill:none;stroke:#e5bb62;stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1.2 2.1;filter:drop-shadow(0 1px 1px #201406)}.map-node{z-index:3}.map-label{z-index:2;max-width:35%;font-size:clamp(9px,2.4vw,12px);padding:2px 3px;white-space:normal;text-align:center;line-height:1.1;pointer-events:none}.map-node:disabled{opacity:.85}.map-art .locked-node{color:#e5d3ac}
 .market-page{max-width:700px;margin:0 auto;background:#0b1019;border:2px solid #84663c}.market-portrait{height:clamp(250px,43dvh,470px);position:relative;overflow:hidden}.market-portrait>img{width:100%;height:100%;object-fit:cover;object-position:center 38%}.market-inventory{padding:12px;background:linear-gradient(#181a21,#090d15);min-height:35dvh}.market-inventory h3{margin:0;text-align:center;color:#e9bd70;font:600 20px Cinzel,serif}.market-greeting{font-style:italic;text-align:center;margin:5px 0 12px;color:#d7c6a8}.market-inventory h4{display:flex;justify-content:space-between;margin:10px 0;color:#e9bd70}.market-inventory small{font-size:13px}.market-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:8px 0 12px}.market-tabs button{padding:9px 2px;background:#151b25;border:1px solid #735734;color:#dfc69b;font-size:clamp(12px,3vw,16px)}.market-tabs button.active{background:#50371f;border-color:#e9bd70;color:#ffe2a4}.market-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:42dvh;overflow-y:auto;padding:3px}.market-item{min-width:0;min-height:108px;background:#171c25;border:1px solid #685235;color:#f3dfbb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px;position:relative}.market-item.selected{border-color:#e9bd70;background:#44311e}.market-item .item-art{height:48px;width:48px;object-fit:contain}.market-item span{font-size:12px;line-height:1.1;overflow-wrap:anywhere;text-align:center}.market-item b{position:absolute;top:3px;right:5px;color:#e9bd70;font-size:12px}.market-empty{grid-column:1/-1;text-align:center;color:#b5a486}.market-sale{position:absolute;z-index:5;top:50%;left:50%;transform:translate(-50%,-50%);width:min(92%,370px);padding:18px 14px;background:#11151ff2;border:2px solid #c99d55;box-shadow:0 0 0 100vmax #0006,0 6px 30px #000e;text-align:center}.market-sale h3{font:600 19px Cinzel,serif;color:#f1cd89;margin:0 22px 8px}.market-sale p{margin:8px 0;color:#e0cba9}.market-x{position:absolute;right:7px;top:5px;background:transparent;border:0;color:#f4dfbb;font-size:25px}.market-quantity{display:flex;align-items:center;justify-content:center;gap:10px;margin:15px 0}.market-quantity button{min-width:42px;min-height:40px;border:1px solid #9c7740;background:#29221d;color:#f8dfad}.market-quantity strong{min-width:28px}.market-total strong{color:#f6cb70}.market-sale .ornate-btn{width:100%;margin-top:8px}
 @media(max-width:440px){.market-portrait{height:39dvh;min-height:230px}.market-grid{max-height:39dvh}.market-sale{padding:12px 10px}.map-node{width:37px;height:37px}}
+
+/* Aloria V9 : raretés cohérentes entre inventaire et commerçants */
+.market-item.rarity-common{border-color:#777}
+.market-item.rarity-uncommon{border-color:#5cbd74}
+.market-item.rarity-rare{border-color:#36a9ec}
+.market-item.rarity-epic{border-color:#b66ce3}
+.market-item.rarity-legendary{border-color:#e8a83e}
+.market-item.rarity-mythic{border-color:#e86669}
+.market-item.selected{outline:2px solid #f5ce83;outline-offset:-3px}
+.forge-home{text-align:center;padding:16px 16px 30px;background:#171a21;color:#f1d5a4;border:1px solid #8b693b}
+.forge-home-art{width:100%;max-height:440px;object-fit:cover;object-position:center 42%;border:1px solid #a17b42}
+.forge-home h3,.forge-shop h3{color:#e6bc72;font-size:clamp(23px,5vw,34px);margin:18px 0 8px}
+.forge-greeting{font-style:italic;font-size:clamp(16px,3.8vw,23px)}
+.forge-entry{display:flex;align-items:center;justify-content:center;gap:10px;margin:24px auto;max-width:360px;width:100%}
+.forge-back{margin:12px 14px}
+.forge-tabs{display:flex;flex-wrap:wrap;gap:5px}
+.forge-tabs button{flex:1 1 26%;min-width:74px}
+.forge-shop .market-item{padding-top:19px;padding-bottom:12px}
+.forge-shop .market-item b{top:2px;right:4px}
+.forge-item-details{text-align:left;max-height:210px;overflow:auto;padding:8px;border:1px solid #896a43;background:#17191e;font-size:14px}
+.forge-item-details p{margin:5px 0}
+.forge-info-button{width:100%;margin:7px 0}
+.forge-next{margin:18px 4px 5px;text-align:center;color:#e3c390;font-style:italic}
+.forge-next svg{vertical-align:middle}
