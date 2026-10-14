@@ -87,3 +87,43 @@
 .sewers-home .sewers-note{font-style:italic;color:#cfb78c;font-size:clamp(13px,3vw,16px)}
 .sewers-entry{font-family:Cinzel,serif;font-size:clamp(13px,3vw,18px);padding:15px 12px;width:100%;display:flex;justify-content:center;align-items:center;gap:10px}
 @media(max-width:430px){.hotspot.sewers{right:5%;top:83%}.sewers-art{max-height:60vh}}
+
+/* Aloria V11 — Comptoir des Reliques */
+.hotspot.comptoir{left:3%;top:84%;display:inline-flex;align-items:center;gap:5px;max-width:43%;white-space:normal;text-align:left;line-height:1.15}
+.hotspot.comptoir svg,.hotspot.sewers svg{flex:none;vertical-align:middle}
+.comptoir-home,.comptoir-shop{max-width:700px;margin:0 auto;color:#ead7b8}
+.comptoir-home{border:1px solid #a07c46;background:#0b1019;text-align:center}
+.comptoir-art{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-bottom:1px solid #b38c51}
+.comptoir-intro{padding:14px 16px 22px;background:linear-gradient(#131822,#090d14)}
+.comptoir-intro p{font-size:clamp(15px,3.4vw,19px);line-height:1.42;margin:10px 0}
+.comptoir-intro .comptoir-quote{font-style:italic;color:#e6b965;margin:17px 0}
+.comptoir-entries{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.comptoir-entries button{min-width:0;min-height:90px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;font:600 clamp(12px,3vw,17px) Cinzel,serif;padding:10px 4px}
+.comptoir-back{margin:0 0 10px;padding:9px 12px}
+.comptoir-shop-hero{position:relative;text-align:center;overflow:hidden;border:1px solid #96703d;background:#0c1018;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:24px 10px 14px}
+.comptoir-shop-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 10%,#080b12df 80%);pointer-events:none}
+.comptoir-shop-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.comptoir-shop-hero h3,.comptoir-shop-hero p{position:relative;z-index:1;margin:4px;text-shadow:0 2px 7px #000}
+.comptoir-shop-hero h3{font:600 clamp(19px,5vw,27px) Cinzel,serif;color:#f1cb80}
+.comptoir-shop-hero p{font-size:clamp(13px,3.2vw,17px)}
+.comptoir-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}
+.comptoir-card{position:relative;min-width:0;border:1px solid #7b6547;background:linear-gradient(#1b2726,#0b1218);text-align:center;padding:9px 5px 12px}
+.coffre-seigneurial{background:linear-gradient(#172a3d,#0b111a);border-color:#9a8055}.coffre-royal{background:linear-gradient(#452020,#150b12);border-color:#bb8d46}
+.comptoir-card-top{display:flex;align-items:flex-start;justify-content:center;gap:3px;min-height:52px}
+.comptoir-card h4{font:600 clamp(11px,2.9vw,17px) Cinzel,serif;color:#f0d8ac;margin:4px 0;overflow-wrap:break-word;flex:1}
+.comptoir-info-btn{flex:none;border:1px solid #aa8955;background:#111720;color:#f0d49d;width:23px;height:23px;border-radius:50%;font:italic 700 15px Georgia,serif;padding:0;line-height:20px}
+.comptoir-chest-art{height:clamp(76px,22vw,155px);background-image:url('../assets/comptoir-reliques.webp');background-repeat:no-repeat;background-size:310% auto;background-position:0% 65%;filter:drop-shadow(0 5px 6px #0009)}
+.coffre-seigneurial .comptoir-chest-art{background-position:50% 65%}.coffre-royal .comptoir-chest-art{background-position:100% 65%}
+.comptoir-qty{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:8px}
+.comptoir-qty button{border:1px solid #97774a;background:#171b22;color:#e5d0aa;padding:6px 0;font-size:clamp(12px,3vw,16px);opacity:.8}
+.comptoir-price{font:600 clamp(16px,4vw,23px) Cinzel,serif;color:#f1ca81;margin:10px 0 5px}
+.comptoir-unavailable{font-size:clamp(11px,2.8vw,14px);color:#c4ad89}
+.comptoir-modal-backdrop{position:fixed;inset:0;z-index:45;background:#000b;display:flex;align-items:center;justify-content:center;padding:16px}
+.comptoir-modal{position:relative;width:min(100%,360px);max-height:85dvh;overflow-y:auto;background:linear-gradient(#1c222b,#0a0d14);border:2px solid #c39a57;box-shadow:0 10px 40px #000;padding:18px 17px 16px;text-align:center}
+.comptoir-modal h3{font:600 19px Cinzel,serif;color:#f2d29b;margin:4px 28px 8px}
+.comptoir-modal-subtitle{margin:8px 0 12px;color:#c7b28e}
+.comptoir-modal-close{position:absolute;top:5px;right:8px;border:0;background:none;color:#eac994;font-size:28px}
+.comptoir-probas>div{display:flex;justify-content:space-between;gap:12px;padding:6px 5px;border-bottom:1px solid #71593855;text-align:left}
+.comptoir-probas strong{color:#f0d8ad;white-space:nowrap}.coffre-rarity.rarity-common{color:#bbb}.coffre-rarity.rarity-uncommon{color:#77c993}.coffre-rarity.rarity-rare{color:#6eb9f2}.coffre-rarity.rarity-epic{color:#d5a0fa}.coffre-rarity.rarity-legendary{color:#efc268}
+.comptoir-modal-note{margin:14px 0 8px;color:#f1d39b}.comptoir-modal-future{font-size:14px;color:#baa789;font-style:italic}.comptoir-modal>.ornate-btn{width:100%;margin-top:7px}
+@media(max-width:430px){.hotspot.comptoir{left:2%;top:87%;font-size:10px;padding:6px 7px;max-width:43%}.hotspot.sewers{top:84%;right:3%}.comptoir-card{padding:7px 3px 10px}.comptoir-card-top{min-height:56px}.comptoir-info-btn{width:22px;height:22px}.comptoir-shop-hero{min-height:160px}}
