@@ -127,3 +127,7 @@
 .comptoir-probas strong{color:#f0d8ad;white-space:nowrap}.coffre-rarity.rarity-common{color:#bbb}.coffre-rarity.rarity-uncommon{color:#77c993}.coffre-rarity.rarity-rare{color:#6eb9f2}.coffre-rarity.rarity-epic{color:#d5a0fa}.coffre-rarity.rarity-legendary{color:#efc268}
 .comptoir-modal-note{margin:14px 0 8px;color:#f1d39b}.comptoir-modal-future{font-size:14px;color:#baa789;font-style:italic}.comptoir-modal>.ornate-btn{width:100%;margin-top:7px}
 @media(max-width:430px){.hotspot.comptoir{left:2%;top:87%;font-size:10px;padding:6px 7px;max-width:43%}.hotspot.sewers{top:84%;right:3%}.comptoir-card{padding:7px 3px 10px}.comptoir-card-top{min-height:56px}.comptoir-info-btn{width:22px;height:22px}.comptoir-shop-hero{min-height:160px}}
+
+/* V11 correctif : emplacement portuaire, toujours au-dessus des quais */
+.city-view .hotspot.comptoir{top:auto;bottom:7%;left:2%;right:auto;max-width:43%;z-index:4;font-size:clamp(10px,2.5vw,13px);padding:7px 8px;white-space:normal}
+@media(max-width:430px){.city-view .hotspot.comptoir{top:auto;bottom:7%;left:2%;max-width:43%;font-size:10px}}
